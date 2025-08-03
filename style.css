@@ -229,7 +229,7 @@ section.visible {
 
 /* About 섹션 */
 #about, .about {
-    margin-top: 140px; /* 원하는 만큼 늘려보세요 (ex: 100~200px) */
+    margin-top: 160px; /* 원하는 만큼 늘려보세요 (ex: 100~200px) */
 }
 
 
@@ -525,3 +525,4 @@ section#about {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
 }
+
