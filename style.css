@@ -1,0 +1,527 @@
+@charset "utf-8"
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+
+html, body, section {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff7043;
+    border-radius: 3px;
+}
+
+/* 네비게이션 */
+.navbar {
+    height: 50px;              /* 시원하게! 70~90px 추천 */
+    padding: 0 2rem;              /* 좌우 넉넉하게 */
+    display: flex;
+    align-items: center;
+    background: #fff;             /* 또는 rgba로 반투명 */
+    box-shadow: none;
+    border: none;
+    width: 100vw;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 1000;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    width: 100%;
+    max-width: 1200px;            /* 가운데 정렬 + 너비 제한 */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #666;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ff7043;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 모바일 메뉴 */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.mobile-menu span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+
+.home {
+    padding-top: 60px;   /* .navbar의 height와 반드시 같게! */
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+
+
+
+.home-title {
+    font-size: 7vw;       /* 원래보다 살짝 줄이기 (예: 기존 10vw → 7vw) */
+    font-weight: 900;     /* 필요시 700~800으로 줄여도 부드러움 */
+    margin-bottom: 2.5vw; /* 아래 공간 더 주기 */
+}
+
+
+
+
+
+.home-full-bg {
+    width: 100vw;
+    height: 120vh;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    position: absolute;
+    top: 20px; left: 0; z-index: 1;
+}
+
+
+/* 섹션 공통 스타일 */
+section {
+    min-height: 100vh;
+    padding: 40px 2rem 40px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 홈 섹션 */
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fff4e6 0%, #ffcc99 100%);
+}
+
+.home {
+    min-height: 100vh !important;   /* 브라우저 한 화면 꽉 채움 */
+    height: auto !important;
+    box-sizing: border-box;
+    /* padding-top, padding-bottom은 네비게이션·하단 공간 조절용 */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.hero-content .subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.8s forwards;
+}
+
+.cta-button.home-cta {
+    position: absolute;
+    left: 50%;
+    bottom: 5vw;   /* 화면 하단에서 5%만큼 위쪽 */
+    z-index: 10;
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: #ff7043;
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+.cta-button.home-cta:hover {
+    background: #e64a19;
+}
+.cta-button:hover {
+    background: #e64a19;
+    transform: translateY(-2px);
+}
+
+/* About 섹션 */
+#about, .about {
+    margin-top: 140px; /* 원하는 만큼 늘려보세요 (ex: 100~200px) */
+}
+
+
+.about {
+    margin-top: 160px !important;  /* 우선순위 높임 */
+}
+
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+.about-grid {
+    max-width:px;       /* 전체 폭 줄이기 (기존 1200px → 900px 정도) */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;            /* 칼럼 간격(필요하면 더 줄이기, ex: 1.5rem) */
+}
+
+
+.about-item {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+
+
+.about-item:hover {
+    transform: translateY(-5px);
+}
+
+.about-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.about-item ul {
+    list-style: none;
+
+
+}
+
+.about-item li {
+    margin-bottom: 0.5rem;
+    color: #666;
+    padding-right: 40px;
+}
+
+.about-item ul li {
+    font-size: 0.8rem;  /* 기본값이 1rem이니 0.8~0.7rem 정도가 2/1(절반) 느낌에 가까워요 */
+    color: #888;        /* 색상도 조금 연하게 바꿔주면 더 깔끔 */
+    line-height: 1.5;
+    font-size: medium;   /* 줄 간격은 살짝 넓혀주면 좋음 */
+}
+
+/* 포트폴리오 섹션 */
+.portfolio {
+    background: #f8f9fa;
+}
+
+.portfolio-categories {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: #ff7043;
+    color: white;
+    border-color: #ff7043;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.portfolio-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-image {
+    margin-top: 25px;
+    width: 100%;
+    height: 200px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.9rem;
+    z-index: 2;
+}
+
+.portfolio-content {
+    padding: 1.5rem;
+    z-index: 3;
+}
+
+.portfolio-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.portfolio-content p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: #fff4e6;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #e64a19;
+    border: 1px solid #ffcc99;
+}
+
+/* Contact 섹션 */
+.contact {
+    background: linear-gradient(135deg, #ff7043 0%, #e64a19 100%);
+    color: white;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.contact .section-title {
+    margin-top: 40px;
+    color: white;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    margin-right: 95px;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.contact-item h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item a {
+    font-size: 1.5rem;
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: white;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 5%; left: 3%;
+    width: 95vw; height: 95vh;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 2000;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 95vw;
+    max-height: 80vh;
+    position: relative;
+    overflow: auto;
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+/* 애니메이션 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-categories {
+        gap: 1rem;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}
+
+
+/* About 영역(한 화면 꽉 채우지 않고, 실제 내용만큼만 높이!) */
+#about,
+.about,
+section#about {
+    min-height: auto !important;  /* 한 화면(100vh) 채우는거 지우기 */
+    height: auto !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
